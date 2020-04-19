@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подсчет заданий для лабораторный работ по основам программирования</title>
+
+    <style>
+        .container {
+            width: 40%;
+            min-width: 300px;
+            max-width: 700px;
+            margin: 0 auto;
+            border: 1px solid #dadada;
+            border-radius: 5px;
+            padding: 20px; 
+        }
+
+        h1, h3 {
+            text-align: center;
+        }
+
+        input {
+            display: block;
+            width: 100px;
+        }
+
+        button {
+            padding: 10px 17px;
+            border: 1px solid grey;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Подсчет заданий</h1>
+        <h3>Для лабораторный работ по основам программирования</h3>
+        <form id="taskCalc">
+            <label for="taskNumber">
+                Введите номер задания
+            </label>
+            <input type="number" name="taskNumber" id="taskNumber"><br>
+            <label for="studentNumber">
+                Введите ваш номер в журнале
+            </label>
+            <input type="number" name="studentNumber" id="studentNumber"><br>
+            <button type="submit">Посчитать</button>
+        </form>
+
+        <div id="result"></div>
+    </div>
+    
+
+    <script>
+        console.log(result)
+
+        const $taskCalc = document.querySelector('#taskCalc');
+
+        $taskCalc.addEventListener('submit', e => {
+            e.preventDefault();
+            const $taskCalcForm = e.currentTarget;
+
+            const student = {};
+            const formData = new FormData($taskCalcForm);
+
+            formData.forEach((v, k) => {
+                student[k] = v;
+            })
+            const studentTask = 1 + ((Math.pow(student.studentNumber, 2) * student.taskNumber + 3 * student.studentNumber) % 46);
+
+            const $result = document.querySelector('#result');
+            const $p = document.createElement('p');
+
+            $p.innerHTML = `Для ${student.taskNumber} задания выполняй №<b>${studentTask}</b>`;
+
+            $result.appendChild($p);
+        })
+
+    </script>
+</body>
+</html>
